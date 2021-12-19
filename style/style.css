@@ -533,7 +533,7 @@ nav .search-btn button::before {
 }
 
 .card-sale {
-  position: absolute;
+position: absolute;
   top: 10px;
   left: 8px;
   color: #ffffff;
