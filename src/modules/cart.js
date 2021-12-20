@@ -64,7 +64,7 @@ const cart = () => {
         return item.id === +key;
       });
 
-      cart.splice(index);
+      cart.splice(index,1);
       localStorage.setItem("cart", JSON.stringify(cart));
       renderCart(cart);
       cartTotal.textContent = cart.reduce((sum, goodItem) => {
