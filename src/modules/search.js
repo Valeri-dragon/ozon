@@ -9,13 +9,12 @@ const search = () => {
     const eventValueInput = searchInput.value;
     getData().then((goods) =>
       renderGoods(searchFilter(goods, eventValueInput))
-    ); //отправка данных от сервера из модуля
+    );
   };
   searchInput.addEventListener("input", valueInput);
   searcBtn.addEventListener("click", valueInput);
   searchInput.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {
-      // можете делать все что угодно со значением текстового поля
       valueInput();
     }
   });

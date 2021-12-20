@@ -1,20 +1,21 @@
-import refreshCounter from "./refreshCounter";
-const renderGoods = (goods) => {
+const renderCart = (goods) => {
+  const cartWrapper = document.querySelector(".cart-wrapper");
 
-  const goodsWrapper = document.querySelector(".goods");
-  
-  localStorage.setItem("goods", JSON.stringify(goods));
+  cartWrapper.innerHTML = "";
 
-  goodsWrapper.innerHTML = "";
- 
-  goods.forEach((goodsItem) => {
-  
-    goodsWrapper.insertAdjacentHTML(
+  if (goods.length === 0) {
+    cartWrapper.insertAdjacentHTML(
       "beforeend",
-      
-      ` 
+      ` <div id="cart-empty">Ваша корзина пока пуста</div>`
+    );
+  } else {
+    goods.forEach((goodsItem) => {
+      cartWrapper.insertAdjacentHTML(
+        "beforeend",
+
+        ` 
     
-    	<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    
 								<div class="card" data-key="${goodsItem.id}">
                 	${
                     goodsItem.sale
@@ -28,14 +29,14 @@ const renderGoods = (goods) => {
 									<div class="card-body justify-content-between">
 										<div class="card-price">${goodsItem.price} ₽</div>
 										<h5 class="card-title">${goodsItem.title}</h5>
-										<button class="btn btn-primary">В корзину</button>
+										<button class="btn btn-primary">Убрать из корзины</button>
 									</div>
 								</div>
-							</div>
+							
     
     `
-    );
-  });
-  refreshCounter();
+      );
+    });
+  }
 };
-export default renderGoods;
+export default renderCart;

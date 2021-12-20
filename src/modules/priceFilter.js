@@ -1,20 +1,50 @@
 import getData from "./getData";
 import renderGoods from "./renderGoods";
-import { filterPrice } from "./filters";
+import { filterPrice, hotSailFilter } from "./filters";
 
 const priceFilter = () => {
-  const filterBlock = document.querySelector(".filter");
-  const formFilter = filterBlock.querySelectorAll("form");
-  formFilter.forEach((formItem) => {
-    formItem.addEventListener("input", (event) => {
-      //getData().then((goods) => renderGoods(filterPrice(goods, event))); //отправка данных от сервера из модуля
-
-      if (event.target.closest("#min")) {
-        const min = event.target.value;
-        getData().then((goods) => renderGoods(filterPrice(goods, event)));
-      }
-    });
+  const minInput = document.getElementById("min");
+  const maxInput = document.getElementById("max");
+  const checkSale = document.getElementById("discount-checkbox");
+  const checkMarker = document.querySelector(".filter-check_checkmark");
+  minInput.addEventListener("input", () => {
+    getData().then((goods) =>
+      renderGoods(
+        filterPrice(
+          hotSailFilter(goods, checkSale.checked),
+          minInput.value,
+          maxInput.value
+        )
+      )
+    );
   });
-  //console.log(filterPrice);
+  maxInput.addEventListener("input", () => {
+    getData().then((goods) =>
+      renderGoods(
+        filterPrice(
+          hotSailFilter(goods, checkSale.checked),
+          minInput.value,
+          maxInput.value
+        )
+      )
+    );
+  });
+  checkSale.addEventListener("change", () => {
+    if (checkSale.checked) {
+      checkMarker.classList.add("checked");
+    } else {
+      checkMarker.classList.remove("checked");
+    }
+
+    getData().then((goods) =>
+      renderGoods(
+        filterPrice(
+          hotSailFilter(goods, checkSale.checked),
+          minInput.value,
+          maxInput.value
+        )
+      )
+    );
+  });
 };
 export default priceFilter;

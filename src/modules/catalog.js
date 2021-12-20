@@ -19,7 +19,7 @@ const catalog = () => {
       const text = item.textContent;
 
       console.log(text);
-      getData().then((goods) => renderGoods(categoryFilter(goods, text))); //отправка данных от сервера из модуля
+      getData().then((goods) => renderGoods(categoryFilter(goods, text)));
     });
   });
   catalogModal.addEventListener("mouseleave", () => {
